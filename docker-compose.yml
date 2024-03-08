@@ -1,0 +1,12 @@
+version: "1.0"
+
+services:
+  cars_db:
+    environment:
+      POSTGRES_DB: cars
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: DontTellAnyone2024
+    image: postgres:14.6
+    ports:
+      - 5445:5432
+    container_name: cars
