@@ -29,9 +29,8 @@ public class CarEvaluatorService {
     }
 
     private String fillTemplate(String template, List<Car> carSet) {
-        StringBuilder sb = new StringBuilder(template);
-        var startPosition = sb.indexOf(templateProperties.getLoopBegin()) + templateProperties.getLoopBegin().length();
-        String carDataSub = sb.substring(startPosition, sb.indexOf(templateProperties.getLoopEnd()));
+        var startPosition = template.indexOf(templateProperties.getLoopBegin()) + templateProperties.getLoopBegin().length();
+        String carDataSub = template.substring(startPosition, template.indexOf(templateProperties.getLoopEnd()));
         String carDataListFilled = createCarDataList(carDataSub, carSet);
         return createEmail(carDataListFilled, template);
     }
