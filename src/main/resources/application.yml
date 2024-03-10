@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    username: root
+    password: DontTellAnyone2024
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5445/cars
+
+evaluator:
+  template:
+    parameters:
+      loopBegin: <carsLoopBegin>
+      loopEnd: <carsLoopEnd>
+      brand: <brand>
+      type: <type>
+      year: <yearOfManufacture>
+      plate: <plateNumber>
+      distance: <drivenDistance>
+      value: <calculatedValue>
+      name: <name>
+      country: <country>
+      dateOfBirth: <dateOfBirth>
+

@@ -16,27 +16,27 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CarEvaluatorService {
+public class BasicEmailTemplateService implements EmailTemplateService{
 
     private final TemplateProperties templateProperties;
     private final EmailTemplateCache emailTemplateCache;
     private final PersonRepository personRepository;
 
-    public String constructEmail(Long personId) {
+    public String fillEmailTemplateForPerson(Long personId) {
         Person person = personRepository.findById(personId).orElseThrow(PersonNotFoundException::new);
         String template = getTemplateWithFilledHeader(person);
-        return fillTemplate(template, person.getCarSet());
+        return fillTemplate(template, person.getCarList());
     }
 
-    private String fillTemplate(String template, List<Car> carSet) {
+    private String fillTemplate(String template, List<Car> carList) {
         var startPosition = template.indexOf(templateProperties.getLoopBegin()) + templateProperties.getLoopBegin().length();
         String carDataSub = template.substring(startPosition, template.indexOf(templateProperties.getLoopEnd()));
-        String carDataListFilled = createCarDataList(carDataSub, carSet);
+        String carDataListFilled = createCarDataList(carDataSub, carList);
         return createEmail(carDataListFilled, template);
     }
 
-    private String createCarDataList(String carDataSub, List<Car> carSet) {
-       return carSet.stream().filter(car -> car.getCalculatedValue() > 0 && !car.getIsSent()).map(car -> {
+    private String createCarDataList(String carDataSub, List<Car> carList) {
+       return carList.stream().filter(car -> car.getCalculatedValue() > 0 && !car.getIsSent()).map(car -> {
            log.debug("Constructing car data for car with id: {}", car.getCarId());
             String carData = carDataSub.replace(templateProperties.getBrand(), car.getBrand());
             carData = carData.replace(templateProperties.getType(), car.getType());

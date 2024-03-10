@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
-@Entity(name = "Email_templates")
+@Entity(name = "email_templates")
 public class EmailTemplate {
 
     @Id

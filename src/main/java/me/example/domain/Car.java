@@ -15,13 +15,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Cars")
+@Entity(name = "cars")
 public class Car {
 
     @Id
@@ -36,9 +35,9 @@ public class Car {
     private Boolean isSent;
 
     @JoinTable(
-        name = "Cars_of_people",
+        name = "cars_of_people",
         joinColumns = @JoinColumn(name = "car_id"),
         inverseJoinColumns = @JoinColumn(name = "person_id"))
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Person> personSet;
+    private List<Person> personList;
 }

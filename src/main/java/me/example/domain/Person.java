@@ -9,15 +9,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Data
-@Entity(name = "Person_data")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "person_data")
 public class Person {
 
     @Id
@@ -29,9 +33,9 @@ public class Person {
     private Long languageId;
 
     @JoinTable(
-        name = "Cars_of_people",
+        name = "cars_of_people",
         joinColumns = @JoinColumn(name = "person_id"),
         inverseJoinColumns = @JoinColumn(name = "car_id"))
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Car> carSet;
+    private List<Car> carList;
 }
